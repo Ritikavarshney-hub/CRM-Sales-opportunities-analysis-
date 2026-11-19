@@ -41,33 +41,7 @@ SQL PROJECT/
 
 ---
 
-## Methodology
-
-1. **Business Understanding** — CRM domain concepts (accounts, pipeline stages,
-   sales org hierarchy) documented before writing any SQL.
-2. **Dataset Audit** — a pandas script inspected all 4 source tables for nulls,
-   duplicate keys, referential integrity, and data quality issues (e.g. a
-   `'GTXPro'` vs `'GTX Pro'` mismatch, ~1,425 pipeline rows with no linked
-   account, 6 managers who never appear as agents themselves).
-3. **Database Design** — a star-schema MySQL database (`sales_pipeline` as the
-   fact table; `accounts`, `products`, `sales_teams` as dimensions), with
-   primary keys, foreign keys, and an ER diagram.
-4. **Exploratory SQL** — validated the load against the audit (row counts,
-   distributions, null patterns, sales-cycle-length ranges).
-5. **Business Analysis** — 50+ questions across sales performance, pipeline
-   health, product profitability, account/sector trends, regional
-   performance, time-based trends, and deal-size analysis.
-6. **Advanced SQL** — CTEs, window functions (`RANK`, `ROW_NUMBER`,
-   `PERCENT_RANK`), and (in progress) views, stored procedures, triggers,
-   and indexing.
-7. **Visualization** — key findings charted with Python (see below).
-
----
-
 ## Key Analyses & Charts
-
-Each chart is produced by its matching script in `python_scripts/` and saved
-to `visuals/`. Run the script to regenerate the image below it.
 
 ### Sales Performance
 
@@ -189,16 +163,3 @@ to `visuals/`. Run the script to regenerate the image below it.
    variables if yours differ.)
 
 ---
-
-## Skills Demonstrated
-
-- Data auditing and quality assessment with pandas before schema design
-- Relational schema design: primary keys, foreign keys, self-referencing
-  keys, nullable relationships, and documented design trade-offs
-- SQL: joins, aggregates, `CASE` logic, subqueries, CTEs, and window
-  functions (`RANK`, `ROW_NUMBER`, `PERCENT_RANK`)
-- Debugging real-world data load issues (encoding quirks, duplicate keys,
-  type mismatches) directly in MySQL Workbench
-- Business-oriented analysis: translating raw tables into sales performance,
-  pipeline, and revenue insights
-- Data visualization with pandas + seaborn/matplotlib
